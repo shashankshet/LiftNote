@@ -1,0 +1,81 @@
+2025-01-16 22:59:26.106 - RealTimeSTT: root - INFO - Starting RealTimeSTT
+2025-01-16 22:59:26.112 - RealTimeSTT: root - INFO - Initializing audio recording (creating pyAudio input stream, sample rate: 16000 buffer size: 512
+2025-01-16 22:59:26.117 - RealTimeSTT: root - INFO - Initializing WebRTC voice with Sensitivity 3
+2025-01-16 22:59:26.118 - RealTimeSTT: root - DEBUG - WebRTC VAD voice activity detection engine initialized successfully
+2025-01-16 22:59:26.730 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg6
+2025-01-16 22:59:26.732 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg6 extension.
+Traceback (most recent call last):
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torch/_ops.py", line 1350, in load_library
+    ctypes.CDLL(path)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 379, in __init__
+    self._handle = _dlopen(self._name, mode)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: dlopen(/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/lib/libtorio_ffmpeg6.so, 0x0006): Library not loaded: @rpath/libavutil.58.dylib
+  Referenced from: <2CE67C06-BDEB-3F80-96E3-4F103BB9AEEC> /Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/lib/libtorio_ffmpeg6.so
+  Reason: tried: '/opt/homebrew/lib/libavutil.58.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/lib/libavutil.58.dylib' (no such file), '/opt/homebrew/lib/libavutil.58.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/lib/libavutil.58.dylib' (no such file)
+2025-01-16 22:59:26.734 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg5
+2025-01-16 22:59:26.737 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg5 extension.
+Traceback (most recent call last):
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torch/_ops.py", line 1350, in load_library
+    ctypes.CDLL(path)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 379, in __init__
+    self._handle = _dlopen(self._name, mode)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: dlopen(/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/lib/libtorio_ffmpeg5.so, 0x0006): Library not loaded: @rpath/libavutil.57.dylib
+  Referenced from: <18EE5C42-210E-3E8B-81B0-37AB03553D41> /Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/lib/libtorio_ffmpeg5.so
+  Reason: tried: '/opt/homebrew/lib/libavutil.57.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/lib/libavutil.57.dylib' (no such file), '/opt/homebrew/lib/libavutil.57.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/lib/libavutil.57.dylib' (no such file)
+2025-01-16 22:59:26.737 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg4
+2025-01-16 22:59:26.740 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg4 extension.
+Traceback (most recent call last):
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 108, in _find_versionsed_ffmpeg_extension
+    _load_lib(lib)
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 94, in _load_lib
+    torch.ops.load_library(path)
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torch/_ops.py", line 1350, in load_library
+    ctypes.CDLL(path)
+  File "/opt/homebrew/Cellar/python@3.12/3.12.4/Frameworks/Python.framework/Versions/3.12/lib/python3.12/ctypes/__init__.py", line 379, in __init__
+    self._handle = _dlopen(self._name, mode)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+OSError: dlopen(/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/lib/libtorio_ffmpeg4.so, 0x0006): Library not loaded: @rpath/libavutil.56.dylib
+  Referenced from: <991D7190-DAB8-3DA1-A934-0A5FF14C3C78> /Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/lib/libtorio_ffmpeg4.so
+  Reason: tried: '/opt/homebrew/lib/libavutil.56.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/lib/libavutil.56.dylib' (no such file), '/opt/homebrew/lib/libavutil.56.dylib' (no such file), '/System/Volumes/Preboot/Cryptexes/OS/opt/homebrew/lib/libavutil.56.dylib' (no such file)
+2025-01-16 22:59:26.740 - RealTimeSTT: torio._extension.utils - DEBUG - Loading FFmpeg
+2025-01-16 22:59:26.740 - RealTimeSTT: torio._extension.utils - DEBUG - Failed to load FFmpeg extension.
+Traceback (most recent call last):
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 116, in _find_ffmpeg_extension
+    ext = _find_versionsed_ffmpeg_extension(ffmpeg_ver)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/shashankshet/projects/liftNote/env/lib/python3.12/site-packages/torio/_extension/utils.py", line 106, in _find_versionsed_ffmpeg_extension
+    raise RuntimeError(f"FFmpeg{version} extension is not available.")
+RuntimeError: FFmpeg extension is not available.
+2025-01-16 22:59:26.829 - RealTimeSTT: root - DEBUG - Silero VAD voice activity detection engine initialized successfully
+2025-01-16 22:59:26.830 - RealTimeSTT: root - DEBUG - Starting realtime worker
+2025-01-16 22:59:26.830 - RealTimeSTT: root - DEBUG - Waiting for main transcription model to start
+2025-01-16 22:59:28.671 - RealTimeSTT: root - DEBUG - Main transcription model ready
+2025-01-16 22:59:28.672 - RealTimeSTT: root - DEBUG - RealtimeSTT initialization completed successfully
+2025-01-16 22:59:28.672 - RealTimeSTT: root - INFO - Setting listen time
+2025-01-16 22:59:28.672 - RealTimeSTT: root - INFO - State changed from 'inactive' to 'listening'
+2025-01-16 22:59:28.673 - RealTimeSTT: root - DEBUG - Waiting for recording start
+2025-01-16 22:59:36.239 - RealTimeSTT: root - INFO - KeyboardInterrupt in wait_audio, shutting down
+2025-01-16 22:59:36.240 - RealTimeSTT: root - DEBUG - Finishing recording thread
+2025-01-16 22:59:36.241 - RealTimeSTT: root - DEBUG - Terminating reader process
+2025-01-16 22:59:36.703 - RealTimeSTT: root - DEBUG - Terminating transcription process
+2025-01-16 22:59:36.703 - RealTimeSTT: root - DEBUG - Finishing realtime thread
+2025-01-16 22:59:36.758 - RealTimeSTT: root - INFO - KeyboardInterrupt in text() method
