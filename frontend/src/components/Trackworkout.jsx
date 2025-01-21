@@ -4,10 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Trackworkout = () => {
   const navigate = useNavigate();
   const workoutCategories = [
-    {
-      name: "Cardio",
-      image: "src/assets/cardio.png",
-    },
+    { name: "Cardio", image: "src/assets/cardio.png" },
     { name: "Chest", image: "src/assets/chest.png" },
     { name: "Back", image: "src/assets/Back-muscles.png" },
     { name: "Biceps", image: "src/assets/bicep.png" },
@@ -21,11 +18,11 @@ const Trackworkout = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 p-6">
+    <div className="flex flex-wrap justify-center gap-6 p-6 bg-gray-900 dark:bg-black">
       {workoutCategories.map((category) => (
         <div
           key={category.name}
-          className="w-80 h-40 bg-black text-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform"
+          className="w-80 h-40 bg-black text-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform dark:bg-gray-800"
           onClick={() => handleCardClick(category.name)}
         >
           <div className="relative w-full h-full flex">
