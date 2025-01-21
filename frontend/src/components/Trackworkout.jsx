@@ -18,7 +18,7 @@ const Trackworkout = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 p-6 bg-gray-900 dark:bg-black min-h-screen">
+    <div className="flex flex-wrap justify-center gap-6 p-6 bg-white-900 dark:bg-black">
       {workoutCategories.map((category) => (
         <div
           key={category.name}
