@@ -4,13 +4,13 @@ import { useNavigate } from "react-router-dom";
 const Trackworkout = () => {
   const navigate = useNavigate();
   const workoutCategories = [
-    { name: "Cardio", image: "src/assets/cardio.png" },
-    { name: "Chest", image: "src/assets/chest.png" },
-    { name: "Back", image: "src/assets/Back-muscles.png" },
-    { name: "Biceps", image: "src/assets/bicep.png" },
-    { name: "Triceps", image: "src/assets/tricep.png" },
-    { name: "Abs", image: "src/assets/abs.png" },
-    { name: "Legs", image: "src/assets/legs.png" },
+    { name: "Cardio", image: "static/images/cardio.png" },
+    { name: "Chest", image: "static/images/chest.png" },
+    { name: "Back", image: "static/images/Back-muscles.png" },
+    { name: "Biceps", image: "static/images/bicep.png" },
+    { name: "Triceps", image: "static/images/tricep.png" },
+    { name: "Abs", image: "static/images/abs.png" },
+    { name: "Legs", image: "static/images/legs.png" },
   ];
 
   const handleCardClick = (category) => {
@@ -18,7 +18,7 @@ const Trackworkout = () => {
   };
 
   return (
-    <div className="flex flex-wrap justify-center gap-6 p-6 bg-gray-900 dark:bg-black">
+    <div className="flex flex-wrap justify-center gap-6 p-6 bg-gray-900 dark:bg-black min-h-screen">
       {workoutCategories.map((category) => (
         <div
           key={category.name}
