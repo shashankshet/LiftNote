@@ -121,9 +121,9 @@ const Cardio = () => {
                 <tr key={index} className="border-t border-gray-700">
                   <td className="p-4">{log.exercise}</td>
                   <td className="p-4">{log.minutes}</td>
-                  <td className="p-4">
+                  <td className="p-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                     <button
-                      className="px-2 py-1 bg-blue-500 rounded-lg mr-2"
+                      className="px-2 py-1 bg-blue-500 rounded-lg"
                       onClick={() => handleEdit(index)}
                     >
                       Edit
