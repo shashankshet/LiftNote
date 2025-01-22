@@ -18,12 +18,12 @@ const Trackworkout = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white-900 dark:bg-black">
+    <div className="flex items-center justify-center min-h-screen bg-black dark:bg-black">
       <div className="flex flex-wrap justify-center gap-6 p-6">
         {workoutCategories.map((category) => (
           <div
             key={category.name}
-            className="w-80 h-40 bg-black text-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform dark:bg-gray-800"
+            className="w-80 h-40 bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform dark:bg-gray-800"
             onClick={() => handleCardClick(category.name)}
           >
             <div className="relative w-full h-full flex">
