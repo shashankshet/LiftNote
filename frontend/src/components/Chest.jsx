@@ -2,7 +2,8 @@ import React, { useState } from "react";
 
 const Chest = () => {
   const [selectedExercise, setSelectedExercise] = useState(null);
-  const [minutes, setMinutes] = useState("");
+  const [weight, setWeight] = useState("");
+  const [reps, setReps] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [workoutLogs, setWorkoutLogs] = useState([]);
 
@@ -27,16 +28,26 @@ const Chest = () => {
   };
 
   const handleInputChange = (e) => {
-    setMinutes(e.target.value);
+    const { name, value } = e.target;
+    if (name === "weight") setWeight(value);
+    if (name === "reps") setReps(value);
   };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    setMinutes("");
+    setWeight("");
+    setReps("");
   };
 
   const handleSave = () => {
-    const newLog = { exercise: selectedExercise, minutes: parseInt(minutes) };
+    const newLog = {
+      exercise: selectedExercise,
+      weight: parseInt(weight),
+      reps: parseInt(reps),
+      set:
+        workoutLogs.filter((log) => log.exercise === selectedExercise).length +
+        1,
+    };
     setWorkoutLogs([...workoutLogs, newLog]);
     handleCloseModal();
   };
@@ -44,7 +55,8 @@ const Chest = () => {
   const handleEdit = (index) => {
     const log = workoutLogs[index];
     setSelectedExercise(log.exercise);
-    setMinutes(log.minutes);
+    setWeight(log.weight);
+    setReps(log.reps);
     setIsModalOpen(true);
     setWorkoutLogs(workoutLogs.filter((_, i) => i !== index));
   };
@@ -87,11 +99,20 @@ const Chest = () => {
               Log Workout for {selectedExercise}
             </h2>
             <label className="block text-lg font-bold mb-2">
-              Enter minutes:
+              Enter weight (kg):
             </label>
             <input
               type="number"
-              value={minutes}
+              name="weight"
+              value={weight}
+              onChange={handleInputChange}
+              className="w-full p-2 rounded-lg bg-gray-700 text-white border border-gray-600 mb-4"
+            />
+            <label className="block text-lg font-bold mb-2">Enter reps:</label>
+            <input
+              type="number"
+              name="reps"
+              value={reps}
               onChange={handleInputChange}
               className="w-full p-2 rounded-lg bg-gray-700 text-white border border-gray-600 mb-4"
             />
@@ -120,7 +141,9 @@ const Chest = () => {
             <thead>
               <tr className="bg-gray-700">
                 <th className="p-4 text-left">Exercise</th>
-                <th className="p-4 text-left">Minutes</th>
+                <th className="p-4 text-left">Weight (kg)</th>
+                <th className="p-4 text-left">Reps</th>
+                <th className="p-4 text-left">Set</th>
                 <th className="p-4 text-left">Actions</th>
               </tr>
             </thead>
@@ -128,7 +151,9 @@ const Chest = () => {
               {workoutLogs.map((log, index) => (
                 <tr key={index} className="border-t border-gray-700">
                   <td className="p-4">{log.exercise}</td>
-                  <td className="p-4">{log.minutes}</td>
+                  <td className="p-4">{log.weight}</td>
+                  <td className="p-4">{log.reps}</td>
+                  <td className="p-4">Set {log.set}</td>
                   <td className="p-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                     <button
                       className="px-2 py-1 bg-blue-500 rounded-lg"
