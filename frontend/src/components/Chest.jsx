@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { toPng } from "html-to-image";
 
 const Chest = () => {
   const [selectedExercise, setSelectedExercise] = useState(null);
@@ -6,6 +7,12 @@ const Chest = () => {
   const [reps, setReps] = useState("");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [workoutLogs, setWorkoutLogs] = useState([]);
+  const reportRef = useRef(null);
+
+  useEffect(() => {
+    localStorage.removeItem("workoutLogs");
+    setWorkoutLogs([]);
+  }, []);
 
   const chestExercises = [
     { name: "Bench Press", image: "static/images/benchpress.png" },
@@ -48,7 +55,9 @@ const Chest = () => {
         workoutLogs.filter((log) => log.exercise === selectedExercise).length +
         1,
     };
-    setWorkoutLogs([...workoutLogs, newLog]);
+    const updatedLogs = [...workoutLogs, newLog];
+    setWorkoutLogs(updatedLogs);
+    localStorage.setItem("workoutLogs", JSON.stringify(updatedLogs));
     handleCloseModal();
   };
 
@@ -58,11 +67,32 @@ const Chest = () => {
     setWeight(log.weight);
     setReps(log.reps);
     setIsModalOpen(true);
-    setWorkoutLogs(workoutLogs.filter((_, i) => i !== index));
+    const updatedLogs = workoutLogs.filter((_, i) => i !== index);
+    setWorkoutLogs(updatedLogs);
+    localStorage.setItem("workoutLogs", JSON.stringify(updatedLogs));
   };
 
   const handleDelete = (index) => {
-    setWorkoutLogs(workoutLogs.filter((_, i) => i !== index));
+    const updatedLogs = workoutLogs.filter((_, i) => i !== index);
+    setWorkoutLogs(updatedLogs);
+    localStorage.setItem("workoutLogs", JSON.stringify(updatedLogs));
+  };
+
+  const generateReport = () => {
+    if (reportRef.current === null) {
+      return;
+    }
+
+    toPng(reportRef.current)
+      .then((dataUrl) => {
+        const link = document.createElement("a");
+        link.download = "workout_report.png";
+        link.href = dataUrl;
+        link.click();
+      })
+      .catch((err) => {
+        console.error("Failed to generate image", err);
+      });
   };
 
   return (
@@ -137,41 +167,71 @@ const Chest = () => {
       {workoutLogs.length > 0 && (
         <div className="mt-8 w-full max-w-4xl p-4 sm:p-6">
           <h2 className="text-xl font-bold mb-4">Workout Logs</h2>
-          <table className="w-full bg-gray-800 text-white rounded-lg overflow-hidden">
-            <thead>
-              <tr className="bg-gray-700">
-                <th className="p-4 text-left">Exercise</th>
-                <th className="p-4 text-left">Weight (kg)</th>
-                <th className="p-4 text-left">Reps</th>
-                <th className="p-4 text-left">Set</th>
-                <th className="p-4 text-left">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {workoutLogs.map((log, index) => (
-                <tr key={index} className="border-t border-gray-700">
-                  <td className="p-4">{log.exercise}</td>
-                  <td className="p-4">{log.weight}</td>
-                  <td className="p-4">{log.reps}</td>
-                  <td className="p-4">Set {log.set}</td>
-                  <td className="p-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
-                    <button
-                      className="px-2 py-1 bg-blue-500 rounded-lg"
-                      onClick={() => handleEdit(index)}
-                    >
-                      Edit
-                    </button>
-                    <button
-                      className="px-2 py-1 bg-red-500 rounded-lg"
-                      onClick={() => handleDelete(index)}
-                    >
-                      Delete
-                    </button>
-                  </td>
+          <div ref={reportRef} className="bg-gray-800 p-4 rounded-lg shadow-lg">
+            <table className="w-full bg-gray-800 text-white rounded-lg overflow-hidden">
+              <thead>
+                <tr className="bg-gray-700">
+                  <th className="p-4 text-left">Exercise</th>
+                  <th className="p-4 text-left">Weight (kg)</th>
+                  <th className="p-4 text-left">Reps</th>
+                  <th className="p-4 text-left">Set</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {workoutLogs.map((log, index) => (
+                  <tr key={index} className="border-t border-gray-700">
+                    <td className="p-4">{log.exercise}</td>
+                    <td className="p-4">{log.weight}</td>
+                    <td className="p-4">{log.reps}</td>
+                    <td className="p-4">{log.set}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="bg-gray-800 p-4 rounded-lg shadow-lg mt-4">
+            <table className="w-full bg-gray-800 text-white rounded-lg overflow-hidden">
+              <thead>
+                <tr className="bg-gray-700">
+                  <th className="p-4 text-left">Exercise</th>
+                  <th className="p-4 text-left">Weight (kg)</th>
+                  <th className="p-4 text-left">Reps</th>
+                  <th className="p-4 text-left">Set</th>
+                  <th className="p-4 text-left">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                {workoutLogs.map((log, index) => (
+                  <tr key={index} className="border-t border-gray-700">
+                    <td className="p-4">{log.exercise}</td>
+                    <td className="p-4">{log.weight}</td>
+                    <td className="p-4">{log.reps}</td>
+                    <td className="p-4">Set {log.set}</td>
+                    <td className="p-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
+                      <button
+                        className="px-2 py-1 bg-blue-500 rounded-lg"
+                        onClick={() => handleEdit(index)}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        className="px-2 py-1 bg-red-500 rounded-lg"
+                        onClick={() => handleDelete(index)}
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <button
+            className="mt-4 px-4 py-2 bg-blue-500 rounded-lg"
+            onClick={generateReport}
+          >
+            Generate Report
+          </button>
         </div>
       )}
     </div>
