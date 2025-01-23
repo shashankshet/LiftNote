@@ -10,8 +10,8 @@ const Chest = () => {
   const reportRef = useRef(null);
 
   useEffect(() => {
-    localStorage.removeItem("workoutLogs");
-    setWorkoutLogs([]);
+    const storedLogs = JSON.parse(localStorage.getItem("workoutLogs")) || [];
+    setWorkoutLogs(storedLogs);
   }, []);
 
   const chestExercises = [
@@ -175,28 +175,6 @@ const Chest = () => {
                   <th className="p-4 text-left">Weight (kg)</th>
                   <th className="p-4 text-left">Reps</th>
                   <th className="p-4 text-left">Set</th>
-                </tr>
-              </thead>
-              <tbody>
-                {workoutLogs.map((log, index) => (
-                  <tr key={index} className="border-t border-gray-700">
-                    <td className="p-4">{log.exercise}</td>
-                    <td className="p-4">{log.weight}</td>
-                    <td className="p-4">{log.reps}</td>
-                    <td className="p-4">{log.set}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <div className="bg-gray-800 p-4 rounded-lg shadow-lg mt-4">
-            <table className="w-full bg-gray-800 text-white rounded-lg overflow-hidden">
-              <thead>
-                <tr className="bg-gray-700">
-                  <th className="p-4 text-left">Exercise</th>
-                  <th className="p-4 text-left">Weight (kg)</th>
-                  <th className="p-4 text-left">Reps</th>
-                  <th className="p-4 text-left">Set</th>
                   <th className="p-4 text-left">Actions</th>
                 </tr>
               </thead>
@@ -206,7 +184,7 @@ const Chest = () => {
                     <td className="p-4">{log.exercise}</td>
                     <td className="p-4">{log.weight}</td>
                     <td className="p-4">{log.reps}</td>
-                    <td className="p-4">Set {log.set}</td>
+                    <td className="p-4">{log.set}</td>
                     <td className="p-4 flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-2">
                       <button
                         className="px-2 py-1 bg-blue-500 rounded-lg"
