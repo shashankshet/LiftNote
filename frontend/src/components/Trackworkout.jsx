@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const Trackworkout = () => {
   const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
   const workoutCategories = [
     { name: "Cardio", image: "static/images/cardio.png" },
     { name: "Chest", image: "static/images/chest.png" },
@@ -17,10 +18,21 @@ const Trackworkout = () => {
     navigate(`/${category.toLowerCase()}`);
   };
 
+  const filteredCategories = workoutCategories.filter((category) =>
+    category.name.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   return (
-    <div className="flex items-center justify-center min-h-screen bg-black dark:bg-black">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black dark:bg-black">
+      <input
+        type="text"
+        placeholder="Search workouts..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="mb-6 p-2 rounded-lg bg-gray-700 text-white border border-gray-600"
+      />
       <div className="flex flex-wrap justify-center gap-6 p-6">
-        {workoutCategories.map((category) => (
+        {filteredCategories.map((category) => (
           <div
             key={category.name}
             className="w-80 h-40 bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform dark:bg-gray-800"
