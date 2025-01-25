@@ -23,13 +23,13 @@ const Trackworkout = () => {
   );
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-black dark:bg-black">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-black dark:bg-black p-6">
       <input
         type="text"
         placeholder="Search workouts..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-6 p-2 rounded-lg bg-gray-700 text-white border border-gray-600"
+        className="mb-6 p-2 rounded-lg bg-gray-700 text-white border border-gray-600 w-full max-w-md"
       />
       <div className="flex flex-wrap justify-center gap-6 p-6">
         {filteredCategories.map((category) => (
