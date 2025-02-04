@@ -1,0 +1,54 @@
+[
+    {
+      "name": "Cardio",
+      "image": "static/images/cardio.png",
+      "exercises": ["Running", "Cycling", "Swimming"]
+    },
+    {
+      "name": "Chest",
+      "image": "static/images/chest.png",
+      "exercises": [
+        "Bench Press",
+        "Machine Chest Press",
+        "Incline Bench Press",
+        "Chest Fly",
+        "Cable Fly",
+        "Push Ups"
+      ]
+    },
+    {
+      "name": "Back",
+      "image": "static/images/Back-muscles.png",
+      "exercises": ["Pull Ups", "Deadlifts", "Bent Over Rows", "Lat Pulldowns"]
+    },
+    {
+      "name": "Biceps",
+      "image": "static/images/bicep.png",
+      "exercises": [
+        "Bicep Curls",
+        "Hammer Curls",
+        "Concentration Curls",
+        "Preacher Curls"
+      ]
+    },
+    {
+      "name": "Triceps",
+      "image": "static/images/tricep.png",
+      "exercises": [
+        "Tricep Dips",
+        "Skull Crushers",
+        "Tricep Pushdowns",
+        "Overhead Tricep Extension"
+      ]
+    },
+    {
+      "name": "Abs",
+      "image": "static/images/abs.png",
+      "exercises": ["Crunches", "Planks", "Leg Raises", "Russian Twists"]
+    },
+    {
+      "name": "Legs",
+      "image": "static/images/legs.png",
+      "exercises": ["Squats", "Lunges", "Leg Press", "Calf Raises"]
+    }
+  ]

@@ -1,63 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import workoutCategories from "../data/workoutCategories.json";
 
 const Trackworkout = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
-
-  const workoutCategories = [
-    {
-      name: "Cardio",
-      image: "static/images/cardio.png",
-      exercises: ["Running", "Cycling", "Swimming"],
-    },
-    {
-      name: "Chest",
-      image: "static/images/chest.png",
-      exercises: [
-        "Bench Press",
-        "Machine Chest Press",
-        "Incline Bench Press",
-        "Chest Fly",
-        "Cable Fly",
-        "Push Ups",
-      ],
-    },
-    {
-      name: "Back",
-      image: "static/images/Back-muscles.png",
-      exercises: ["Pull Ups", "Deadlifts", "Bent Over Rows", "Lat Pulldowns"],
-    },
-    {
-      name: "Biceps",
-      image: "static/images/bicep.png",
-      exercises: [
-        "Bicep Curls",
-        "Hammer Curls",
-        "Concentration Curls",
-        "Preacher Curls",
-      ],
-    },
-    {
-      name: "Triceps",
-      image: "static/images/tricep.png",
-      exercises: [
-        "Tricep Dips",
-        "Skull Crushers",
-        "Tricep Pushdowns",
-        "Overhead Tricep Extension",
-      ],
-    },
-    {
-      name: "Abs",
-      image: "static/images/abs.png",
-      exercises: ["Crunches", "Planks", "Leg Raises", "Russian Twists"],
-    },
-    {
-      name: "Legs",
-      image: "static/images/legs.png",
-      exercises: ["Squats", "Lunges", "Leg Press", "Calf Raises"],
-    },
-  ];
+  const scrollContainerRef = useRef(null);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category === selectedCategory ? null : category);
@@ -72,33 +19,64 @@ const Trackworkout = () => {
       exercise.toLowerCase().includes(searchTerm.toLowerCase())
     );
 
+  useEffect(() => {
+    const scrollContainer = scrollContainerRef.current;
+    let scrollAmount = 0;
+    const scrollStep = 1;
+    const scrollInterval = 20;
+
+    const scroll = () => {
+      if (scrollContainer) {
+        scrollAmount =
+          (scrollAmount + scrollStep) % scrollContainer.scrollWidth;
+        scrollContainer.scrollTo({
+          left: scrollAmount,
+          behavior: "smooth",
+        });
+      }
+    };
+
+    const intervalId = setInterval(scroll, scrollInterval);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-black dark:bg-black p-6 w-full">
-      <input
-        type="text"
-        placeholder="Search workouts..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="mb-6 p-2 rounded-lg bg-gray-700 text-white border border-gray-600 w-full max-w-md"
-      />
-      <div className="flex overflow-x-auto gap-4 p-4 w-full">
-        {workoutCategories.map((category) => (
-          <button
-            key={category.name}
-            className={`flex-shrink-0 w-32 h-12 bg-black text-white rounded-full shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform dark:bg-black ${
-              selectedCategory === category.name ? "bg-blue-500" : ""
-            }`}
-            onClick={() => handleCategoryClick(category.name)}
+      <div className="fixed top-0 left-0 right-0 bg-black p-6 z-10 flex flex-col items-center">
+        <input
+          type="text"
+          placeholder="Search workouts..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="mb-4 p-2 rounded-lg bg-gray-700 text-white border border-gray-600 w-full max-w-md"
+        />
+        <div className="relative w-full max-w-md overflow-hidden">
+          <div
+            className="flex justify-center gap-2 animate-scroll"
+            ref={scrollContainerRef}
           >
-            <div className="relative w-full h-full flex items-center justify-center">
-              <span className="text-2xl font-bold">+</span>
-              <h2 className="text-sm font-bold ml-2">{category.name}</h2>
-            </div>
-          </button>
-        ))}
+            {workoutCategories
+              .concat(workoutCategories)
+              .map((category, index) => (
+                <button
+                  key={index}
+                  className={`flex-shrink-0 w-32 h-12 bg-gray-800 text-white rounded-full shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform dark:bg-gray-800 ${
+                    selectedCategory === category.name ? "bg-blue-500" : ""
+                  }`}
+                  onClick={() => handleCategoryClick(category.name)}
+                >
+                  <div className="relative w-full h-full flex items-center justify-center">
+                    <span className="text-2xl font-bold">+</span>
+                    <h2 className="text-sm font-bold ml-2">{category.name}</h2>
+                  </div>
+                </button>
+              ))}
+          </div>
+        </div>
       </div>
-      <div className="w-full max-w-md p-4">
-        <ul className="bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden">
+      <div className="w-full max-w-md p-4 mt-32">
+        <ul className="bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden h-96 overflow-y-auto">
           {filteredExercises.map((exercise, index) => (
             <li
               key={index}
