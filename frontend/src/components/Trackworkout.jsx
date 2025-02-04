@@ -53,7 +53,7 @@ const Trackworkout = () => {
         />
         <div className="relative w-full max-w-md overflow-hidden">
           <div
-            className="flex justify-center gap-2 animate-scroll"
+            className="flex justify-center gap-2 animate-scroll hide-scrollbar touch-pan-x"
             ref={scrollContainerRef}
           >
             {workoutCategories
@@ -75,7 +75,7 @@ const Trackworkout = () => {
           </div>
         </div>
       </div>
-      <div className="w-full max-w-md p-4 mt-32">
+      <div className="w-full max-w-md p-4 mt-24">
         <ul className="bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden h-96 overflow-y-auto">
           {filteredExercises.map((exercise, index) => (
             <li

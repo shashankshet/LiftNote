@@ -64,6 +64,23 @@
     @apply bg-background text-foreground;
   }
 }
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  white-space: nowrap;
+  animation: scroll 20s linear infinite;
+  will-change: transform;
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -71,4 +88,8 @@
 .hide-scrollbar {
   -ms-overflow-style: none; /* Internet Explorer 10+ */
   scrollbar-width: none; /* Firefox */
+}
+
+.touch-pan-x {
+  touch-action: pan-x;
 }
