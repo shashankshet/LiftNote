@@ -28,24 +28,25 @@ const Trackworkout = () => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="mb-4 p-2 rounded-lg bg-gray-700 text-white border border-gray-600 w-full max-w-md"
         />
-        <div className="relative w-full max-w-md overflow-x-auto hide-scrollbar">
-          <div className="flex justify-center gap-2">
-            {workoutCategories.map((category, index) => (
-              <button
-                key={index}
-                className={`flex-shrink-0 w-32 h-12 bg-gray-800 text-white rounded-full shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform dark:bg-gray-800 ${
-                  selectedCategory === category.name ? "bg-blue-500" : ""
-                }`}
-                onClick={() => handleCategoryClick(category.name)}
-              >
-                <div className="relative w-full h-full flex items-center justify-center">
-                  <span className="text-2xl font-bold">+</span>
-                  <h2 className="text-sm font-bold ml-2">{category.name}</h2>
-                </div>
-              </button>
-            ))}
-          </div>
+        <div className="relative w-full max-w-md overflow-x-auto scrollbar-hide">
+  <div className="flex justify-start gap-2">
+    {workoutCategories.map((category, index) => (
+      <button
+        key={index}
+        className={`flex-shrink-0 w-28 sm:w-32 h-12 bg-gray-700 text-white rounded-full shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-transform ${
+          selectedCategory === category.name ? "bg-gray-600" : ""
+        }`}
+        onClick={() => handleCategoryClick(category.name)}
+      >
+        <div className="relative w-full h-full flex items-center justify-center">
+          <span className="text-2xl font-bold">+</span>
+          <h2 className="text-sm font-bold ml-2">{category.name}</h2>
         </div>
+      </button>
+    ))}
+  </div>
+</div>
+
       </div>
       <div className="w-full max-w-md p-4 mt-24">
         <ul className="bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden h-96 overflow-y-auto">
