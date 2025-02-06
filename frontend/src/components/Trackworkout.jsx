@@ -2,13 +2,24 @@ import React, { useState } from "react";
 import workoutCategories from "../data/workoutCategories.json";
 import { motion } from "framer-motion";
 import { SearchIcon } from "@heroicons/react/solid";
+import ExercisePopup from "./ExercisePopup";
 
 const Trackworkout = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [selectedExercise, setSelectedExercise] = useState(null);
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category === selectedCategory ? null : category);
+  };
+
+  const handleExerciseClick = (exercise) => {
+    setSelectedExercise(exercise);
+  };
+
+  const handleSubmit = (weight, reps, unit) => {
+    console.log(`Exercise: ${selectedExercise}, Weight: ${weight}${unit}, Reps: ${reps}`);
+    setSelectedExercise(null);
   };
 
   const filteredExercises = workoutCategories
@@ -67,14 +78,24 @@ const Trackworkout = () => {
           {filteredExercises.map((exercise, index) => (
             <motion.li
               key={index}
-              className="p-4 border-b border-gray-700 last:border-0"
+              className="p-4 border-b border-gray-700 last:border-0 cursor-pointer"
               whileHover={{ scale: 1.03 }}
+              onClick={() => handleExerciseClick(exercise)}
             >
               <h2 className="text-lg font-bold text-white">{exercise}</h2>
             </motion.li>
           ))}
         </motion.ul>
       </div>
+
+      {/* Add the Popup */}
+      {selectedExercise && (
+        <ExercisePopup
+          exercise={selectedExercise}
+          onClose={() => setSelectedExercise(null)}
+          onSubmit={handleSubmit}
+        />
+      )}
     </div>
   );
 };

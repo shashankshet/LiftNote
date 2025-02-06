@@ -1,9 +1,5 @@
 [
-    {
-      "name": "Cardio",
-      "image": "static/images/cardio.png",
-      "exercises": ["Running", "Cycling", "Swimming"]
-    },
+
     {
       "name": "Chest",
       "image": "static/images/chest.png",
@@ -15,6 +11,11 @@
         "Cable Fly",
         "Push Ups"
       ]
+    },
+    {
+      "name": "Shoulders",
+      "image": "static/images/cardio.png",
+      "exercises": ["Barbell shoulder press", "Dumbell Lateral Raise", "Shoulder Press", "Front Raises", "Lying Lateral Raises"]
     },
     {
       "name": "Back",
