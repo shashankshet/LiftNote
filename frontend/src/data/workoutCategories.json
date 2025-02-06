@@ -1,55 +1,135 @@
 [
-
-    {
-      "name": "Chest",
-      "image": "static/images/chest.png",
-      "exercises": [
-        "Bench Press",
-        "Machine Chest Press",
-        "Incline Bench Press",
-        "Chest Fly",
-        "Cable Fly",
-        "Push Ups"
-      ]
-    },
-    {
-      "name": "Shoulders",
-      "image": "static/images/cardio.png",
-      "exercises": ["Barbell shoulder press", "Dumbell Lateral Raise", "Shoulder Press", "Front Raises", "Lying Lateral Raises"]
-    },
-    {
-      "name": "Back",
-      "image": "static/images/Back-muscles.png",
-      "exercises": ["Pull Ups", "Deadlifts", "Bent Over Rows", "Lat Pulldowns"]
-    },
-    {
-      "name": "Biceps",
-      "image": "static/images/bicep.png",
-      "exercises": [
-        "Bicep Curls",
-        "Hammer Curls",
-        "Concentration Curls",
-        "Preacher Curls"
-      ]
-    },
-    {
-      "name": "Triceps",
-      "image": "static/images/tricep.png",
-      "exercises": [
-        "Tricep Dips",
-        "Skull Crushers",
-        "Tricep Pushdowns",
-        "Overhead Tricep Extension"
-      ]
-    },
-    {
-      "name": "Abs",
-      "image": "static/images/abs.png",
-      "exercises": ["Crunches", "Planks", "Leg Raises", "Russian Twists"]
-    },
-    {
-      "name": "Legs",
-      "image": "static/images/legs.png",
-      "exercises": ["Squats", "Lunges", "Leg Press", "Calf Raises"]
-    }
-  ]
+  {
+    "name": "Chest",
+    "image": "static/images/chest.png",
+    "exercises": [
+      "Bench Press",
+      "Machine Chest Press",
+      "Incline Bench Press",
+      "Chest Fly",
+      "Cable Fly",
+      "Push Ups",
+      "Dumbbell Pullover",
+      "Decline Bench Press",
+      "Incline Dumbbell Press",
+      "Pec Deck Machine",
+      "Svend Press",
+      "Dumbbell Chest Press",
+      "Isometric Chest Squeeze"
+    ]
+  },
+  {
+    "name": "Shoulders",
+    "image": "static/images/cardio.png",
+    "exercises": [
+      "Barbell Shoulder Press",
+      "Dumbbell Lateral Raise",
+      "Shoulder Press",
+      "Front Raises",
+      "Lying Lateral Raises",
+      "Arnold Press",
+      "Dumbbell Shrugs",
+      "Upright Rows",
+      "Cable Lateral Raises",
+      "Rear Delt Fly",
+      "Plate Front Raises",
+      "Single Arm Overhead Press",
+      "Face Pulls"
+    ]
+  },
+  {
+    "name": "Back",
+    "image": "static/images/Back-muscles.png",
+    "exercises": [
+      "Pull Ups",
+      "Deadlifts",
+      "Bent Over Rows",
+      "Lat Pulldowns",
+      "T-Bar Rows",
+      "Single-Arm Dumbbell Row",
+      "Seated Cable Rows",
+      "Rack Pulls",
+      "Face Pulls",
+      "Reverse Grip Barbell Rows",
+      "Kroc Rows",
+      "Straight Arm Pulldown",
+      "Good Mornings"
+    ]
+  },
+  {
+    "name": "Biceps",
+    "image": "static/images/bicep.png",
+    "exercises": [
+      "Bicep Curls",
+      "Hammer Curls",
+      "Concentration Curls",
+      "Preacher Curls",
+      "Cable Curls",
+      "Incline Dumbbell Curls",
+      "Spider Curls",
+      "Zottman Curls",
+      "EZ Bar Curls",
+      "Reverse Curls",
+      "21s (Bicep Curl Variation)",
+      "Chin-Ups",
+      "Bayesian Curl"
+    ]
+  },
+  {
+    "name": "Triceps",
+    "image": "static/images/tricep.png",
+    "exercises": [
+      "Tricep Dips",
+      "Skull Crushers",
+      "Tricep Pushdowns",
+      "Overhead Tricep Extension",
+      "Close-Grip Bench Press",
+      "Rope Overhead Extensions",
+      "Kickbacks",
+      "Tate Press",
+      "Diamond Push-Ups",
+      "Dumbbell Floor Press",
+      "Reverse Grip Tricep Pushdown",
+      "Bench Dips",
+      "Cable Overhead Tricep Extension"
+    ]
+  },
+  {
+    "name": "Abs",
+    "image": "static/images/abs.png",
+    "exercises": [
+      "Crunches",
+      "Planks",
+      "Leg Raises",
+      "Russian Twists",
+      "Hanging Leg Raises",
+      "Cable Crunches",
+      "Ab Rollouts",
+      "V-Ups",
+      "Mountain Climbers",
+      "Bicycle Crunches",
+      "Flutter Kicks",
+      "Side Planks",
+      "Toe Touches"
+    ]
+  },
+  {
+    "name": "Legs",
+    "image": "static/images/legs.png",
+    "exercises": [
+      "Squats",
+      "Lunges",
+      "Leg Press",
+      "Calf Raises",
+      "Romanian Deadlifts",
+      "Leg Extensions",
+      "Leg Curls",
+      "Bulgarian Split Squats",
+      "Hip Thrusts",
+      "Sumo Squats",
+      "Step-Ups",
+      "Goblet Squats",
+      "Glute Kickbacks"
+    ]
+  }
+]
