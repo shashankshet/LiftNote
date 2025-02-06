@@ -32,16 +32,16 @@ const Trackworkout = () => {
     );
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-800 p-6 w-full">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-900 p-6 w-full">
       {/* Header with Search */}
-      <div className="fixed top-0 left-0 right-0 bg-black bg-opacity-70 p-6 z-10 flex flex-col items-center space-y-4">
+      <div className="fixed top-0 left-0 right-0 bg-black bg-opacity-70 backdrop-blur-sm p-6 z-10 flex flex-col items-center space-y-4 border-b border-gray-800">
         <motion.input
           type="text"
           placeholder="Search workouts..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="w-full max-w-md p-3 rounded-xl bg-gray-700 text-white border border-gray-600 placeholder-gray-400"
-          whileFocus={{ scale: 1.05 }}
+          className="w-full max-w-md p-3 rounded-xl bg-black text-white border border-gray-800 placeholder-gray-400 focus:border-white transition-colors focus:outline-none"
+          whileFocus={{ scale: 1.02 }}
         />
         
         {/* Categories */}
@@ -50,11 +50,13 @@ const Trackworkout = () => {
             {workoutCategories.map((category, index) => (
               <motion.button
                 key={index}
-                className={`flex-shrink-0 w-28 sm:w-32 h-12 bg-gray-700 text-white rounded-full shadow-lg overflow-hidden cursor-pointer transform hover:scale-105 transition-all ${
-                  selectedCategory === category.name ? "bg-gray-600" : ""
+                className={`flex-shrink-0 w-28 sm:w-32 h-12 rounded-full shadow-lg overflow-hidden cursor-pointer transform transition-all duration-300 border ${
+                  selectedCategory === category.name 
+                    ? 'bg-white text-black border-white' 
+                    : 'bg-black text-white border-gray-800 hover:border-white'
                 }`}
                 onClick={() => handleCategoryClick(category.name)}
-                whileHover={{ scale: 1.1 }}
+                whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 <div className="relative w-full h-full flex items-center justify-center space-x-2">
@@ -68,9 +70,9 @@ const Trackworkout = () => {
       </div>
 
       {/* Exercises List */}
-      <div className="w-full max-w-md p-4 mt-24">
+      <div className="w-full max-w-md p-4 mt-36">
         <motion.ul
-          className="bg-gray-800 text-white rounded-lg shadow-lg overflow-hidden h-96 overflow-y-auto"
+          className="bg-black border border-gray-800 rounded-xl shadow-2xl overflow-hidden"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5 }}
@@ -78,17 +80,33 @@ const Trackworkout = () => {
           {filteredExercises.map((exercise, index) => (
             <motion.li
               key={index}
-              className="p-4 border-b border-gray-700 last:border-0 cursor-pointer"
-              whileHover={{ scale: 1.03 }}
+              className="border-b border-gray-800 last:border-0 cursor-pointer transition-colors hover:bg-gray-900"
+              whileHover={{ scale: 1.01 }}
               onClick={() => handleExerciseClick(exercise)}
             >
-              <h2 className="text-lg font-bold text-white">{exercise}</h2>
+              <div className="p-4 flex items-center justify-between">
+                <h2 className="text-lg font-light text-white">{exercise}</h2>
+                <div className="text-gray-400">
+                  <svg 
+                    xmlns="http://www.w3.org/2000/svg" 
+                    className="h-5 w-5" 
+                    viewBox="0 0 20 20" 
+                    fill="currentColor"
+                  >
+                    <path 
+                      fillRule="evenodd" 
+                      d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" 
+                      clipRule="evenodd" 
+                    />
+                  </svg>
+                </div>
+              </div>
             </motion.li>
           ))}
         </motion.ul>
       </div>
 
-      {/* Add the Popup */}
+      {/* Exercise Popup */}
       {selectedExercise && (
         <ExercisePopup
           exercise={selectedExercise}

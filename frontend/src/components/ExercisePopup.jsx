@@ -5,7 +5,7 @@ import { XIcon } from '@heroicons/react/solid';
 const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
   const [weight, setWeight] = useState('');
   const [reps, setReps] = useState('');
-  const [unit, setUnit] = useState('kg'); // Default to kg
+  const [unit, setUnit] = useState('kg');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -17,24 +17,28 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+      className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50"
       onClick={onClose}
     >
       <motion.div
-        initial={{ scale: 0.8 }}
-        animate={{ scale: 1 }}
-        className="bg-gray-800 p-6 rounded-xl w-[90%] max-w-md"
+        initial={{ scale: 0.8, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: "spring", duration: 0.5 }}
+        className="bg-gradient-to-b from-gray-900 to-black p-6 rounded-xl w-[90%] max-w-md border border-gray-800 shadow-2xl"
         onClick={e => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-white">{exercise}</h2>
-          <button onClick={onClose}>
-            <XIcon className="h-6 w-6 text-gray-400 hover:text-gray-300" />
+          <button 
+            onClick={onClose}
+            className="transition-transform hover:rotate-90 duration-300"
+          >
+            <XIcon className="h-6 w-6 text-gray-400 hover:text-white" />
           </button>
         </div>
 
         <form onSubmit={handleSubmit}>
-          <h3 className="text-white text-lg mb-4">What is the heaviest weight you lifted?</h3>
+          <h3 className="text-white text-lg mb-4 font-light">What is the heaviest weight you lifted?</h3>
           <div className="flex items-start gap-4 mb-6">
             {/* Weight Input Column */}
             <div className="flex-1 flex flex-col items-center">
@@ -44,19 +48,19 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
                 pattern="[0-9]*"
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
-                className="w-full p-3 bg-gray-700 text-white rounded-lg text-center text-2xl"
+                className="w-full p-3 bg-black text-white rounded-lg text-center text-2xl border border-gray-800 focus:border-white transition-colors focus:outline-none"
                 placeholder="0"
                 min="0"
                 required
               />
               <div className="mt-2 w-full">
-                <div className="bg-gray-700 rounded-full p-1 flex items-center justify-center">
+                <div className="bg-black rounded-full p-1 flex items-center justify-center border border-gray-800">
                   <button
                     type="button"
                     onClick={() => setUnit('kg')}
-                    className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                    className={`px-3 py-1 rounded-full text-sm transition-all duration-300 ${
                       unit === 'kg' 
-                        ? 'bg-blue-600 text-white' 
+                        ? 'bg-white text-black' 
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
@@ -65,9 +69,9 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
                   <button
                     type="button"
                     onClick={() => setUnit('lbs')}
-                    className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                    className={`px-3 py-1 rounded-full text-sm transition-all duration-300 ${
                       unit === 'lbs' 
-                        ? 'bg-blue-600 text-white' 
+                        ? 'bg-white text-black' 
                         : 'text-gray-400 hover:text-white'
                     }`}
                   >
@@ -79,7 +83,7 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
 
             {/* Multiplication Symbol */}
             <div className="flex flex-col items-center justify-center h-[52px]">
-              <span className="text-white text-2xl font-bold">×</span>
+              <span className="text-white text-2xl font-light">×</span>
             </div>
 
             {/* Reps Input Column */}
@@ -90,12 +94,12 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
                 pattern="[0-9]*"
                 value={reps}
                 onChange={(e) => setReps(e.target.value)}
-                className="w-full p-3 bg-gray-700 text-white rounded-lg text-center text-2xl"
+                className="w-full p-3 bg-black text-white rounded-lg text-center text-2xl border border-gray-800 focus:border-white transition-colors focus:outline-none"
                 placeholder="0"
                 min="0"
                 required
               />
-              <div className="mt-2 text-center text-gray-400 text-sm">
+              <div className="mt-2 text-center text-gray-400 text-sm font-light">
                 REPS
               </div>
             </div>
@@ -103,7 +107,7 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
 
           <button
             type="submit"
-            className="w-full bg-green-600 text-white p-4 rounded-lg text-xl font-semibold hover:bg-green-700 transition-colors"
+            className="w-full bg-white text-black p-4 rounded-lg text-xl font-semibold hover:bg-gray-100 transition-colors"
           >
             SAVE THIS SET
           </button>
