@@ -2,6 +2,8 @@
 
 Welcome to **LiftNote**, an interactive weight training logging app designed to help you **track your progress**, **optimize your workouts**, and **train smarter**. Whether you're hitting PRs or refining your form, LiftNote is here to elevate your fitness journey. 🚀
 
+> ⚠️ **Note:** Currently, only the **frontend** is hosted. The **backend** will be hosted soon for full user access. Stay tuned! 🚀
+
 ---
 
 ## 🚀 Features
