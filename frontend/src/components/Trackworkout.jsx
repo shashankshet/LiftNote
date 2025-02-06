@@ -1,13 +1,33 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import workoutCategories from "../data/workoutCategories.json";
 import { motion } from "framer-motion";
 import { SearchIcon } from "@heroicons/react/solid";
 import ExercisePopup from "./ExercisePopup";
+import { workoutService } from "../services/workout.service";
 
 const Trackworkout = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [selectedExercise, setSelectedExercise] = useState(null);
+  const [workouts, setWorkouts] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    fetchWorkouts();
+  }, []);
+
+  const fetchWorkouts = async () => {
+    try {
+      const data = await workoutService.getWorkouts();
+      setWorkouts(data || []);
+    } catch (err) {
+      setError("Failed to fetch workouts");
+      setWorkouts([]);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleCategoryClick = (category) => {
     setSelectedCategory(category === selectedCategory ? null : category);
@@ -17,9 +37,9 @@ const Trackworkout = () => {
     setSelectedExercise(exercise);
   };
 
-  const handleSubmit = (weight, reps, unit) => {
-    console.log(`Exercise: ${selectedExercise}, Weight: ${weight}${unit}, Reps: ${reps}`);
+  const handleSubmit = async (weight, reps, unit) => {
     setSelectedExercise(null);
+    await fetchWorkouts();
   };
 
   const filteredExercises = workoutCategories
@@ -33,6 +53,10 @@ const Trackworkout = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-gradient-to-b from-black to-gray-900 p-6 w-full">
+      {error && (
+        <div className="text-red-500 mb-4">{error}</div>
+      )}
+
       {/* Header with Search */}
       <div className="fixed top-0 left-0 right-0 bg-black bg-opacity-70 backdrop-blur-sm p-6 z-10 flex flex-col items-center space-y-4 border-b border-gray-800">
         <motion.input
@@ -104,6 +128,33 @@ const Trackworkout = () => {
             </motion.li>
           ))}
         </motion.ul>
+      </div>
+
+      {/* Recent Workouts Section */}
+      <div className="w-full max-w-md mt-8">
+        <h2 className="text-white text-xl mb-4">Recent Workouts</h2>
+        {loading ? (
+          <div className="text-gray-400">Loading workouts...</div>
+        ) : workouts.length > 0 ? (
+          <div className="space-y-4">
+            {workouts.map((workout, index) => (
+              <div
+                key={index}
+                className="bg-black border border-gray-800 rounded-lg p-4"
+              >
+                <div className="text-white font-medium">{workout.exercise}</div>
+                <div className="text-gray-400">
+                  {workout.weight} {workout.unit} × {workout.reps} reps
+                </div>
+                <div className="text-gray-500 text-sm">
+                  {new Date(workout.created_at).toLocaleDateString()}
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="text-gray-400">No workouts recorded yet</div>
+        )}
       </div>
 
       {/* Exercise Popup */}

@@ -1,23 +1,35 @@
 import React from 'react';
-import { Hero } from './components/Hero';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import Login from './components/Login';
+import Signup from './components/Signup';
 import Trackworkout from './components/Trackworkout';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { authService } from './services/auth.service';
 
-const App = () => {
+const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
+  if (!authService.isAuthenticated()) {
+    return <Navigate to="/login" replace />;
+  }
+  return <>{children}</>;
+};
+
+function App() {
   return (
     <Router>
-      <div className="relative min-h-screen">
-        <div className="absolute inset-0 bg-cover bg-center" style={{ backgroundImage: 'url(/path/to/your/background-image.jpg)' }}></div>
-        <div className="relative bg-black bg-opacity-75 min-h-screen">
-          <Routes>
-            <Route path="/" element={<Hero />} />
-            <Route path="/Trackworkout" element={<Trackworkout />} />
-            {/* Add other routes here */}
-          </Routes>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
+        <Route
+          path="/track"
+          element={
+            <ProtectedRoute>
+              <Trackworkout />
+            </ProtectedRoute>
+          }
+        />
+        <Route path="/" element={<Navigate to="/track" replace />} />
+      </Routes>
     </Router>
   );
-};
+}
 
 export default App;

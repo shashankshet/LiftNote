@@ -1,15 +1,35 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { XIcon } from '@heroicons/react/solid';
+import { workoutService } from '../services/workout.service';
 
 const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
   const [weight, setWeight] = useState('');
   const [reps, setReps] = useState('');
   const [unit, setUnit] = useState('kg');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    onSubmit(weight, reps, unit);
+    setLoading(true);
+    setError('');
+
+    try {
+      const workoutData = {
+        exercise,
+        weight: Number(weight),
+        reps: Number(reps),
+        unit
+      };
+
+      await workoutService.createWorkout(workoutData);
+      onSubmit(weight, reps, unit);
+    } catch (err) {
+      setError('Failed to save workout. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -38,6 +58,9 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
+          {error && (
+            <div className="text-red-500 text-sm mb-4 text-center">{error}</div>
+          )}
           <h3 className="text-white text-lg mb-4 font-light">What is the heaviest weight you lifted?</h3>
           <div className="flex items-start gap-4 mb-6">
             {/* Weight Input Column */}
@@ -107,9 +130,11 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
 
           <button
             type="submit"
-            className="w-full bg-white text-black p-4 rounded-lg text-xl font-semibold hover:bg-gray-100 transition-colors"
+            disabled={loading}
+            className={`w-full bg-white text-black p-4 rounded-lg text-xl font-semibold transition-colors
+              ${loading ? 'opacity-50 cursor-not-allowed' : 'hover:bg-gray-100'}`}
           >
-            SAVE THIS SET
+            {loading ? 'Saving...' : 'SAVE THIS SET'}
           </button>
         </form>
       </motion.div>
