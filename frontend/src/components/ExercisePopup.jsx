@@ -34,55 +34,60 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
         </div>
 
         <form onSubmit={handleSubmit}>
-          <div className="flex items-center gap-4 mb-6">
-            {/* Weight Input with Unit Toggle */}
-            <div className="flex-1">
-              <div className="relative">
-                <input
-                  type="number"
-                  value={weight}
-                  onChange={(e) => setWeight(e.target.value)}
-                  className="w-full p-3 bg-gray-700 text-white rounded-lg text-center text-2xl"
-                  placeholder="0"
-                  min="0"
-                  required
-                />
-                <div className="mt-2 flex justify-center">
-                  <div className="bg-gray-700 rounded-full p-1 flex items-center">
-                    <button
-                      type="button"
-                      onClick={() => setUnit('kg')}
-                      className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                        unit === 'kg' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'text-gray-400 hover:text-white'
-                      }`}
-                    >
-                      KG
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => setUnit('lbs')}
-                      className={`px-3 py-1 rounded-full text-sm transition-colors ${
-                        unit === 'lbs' 
-                          ? 'bg-blue-600 text-white' 
-                          : 'text-gray-400 hover:text-white'
-                      }`}
-                    >
-                      LBS
-                    </button>
-                  </div>
+          <h3 className="text-white text-lg mb-4">What is the heaviest weight you lifted?</h3>
+          <div className="flex items-start gap-4 mb-6">
+            {/* Weight Input Column */}
+            <div className="flex-1 flex flex-col items-center">
+              <input
+                type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
+                value={weight}
+                onChange={(e) => setWeight(e.target.value)}
+                className="w-full p-3 bg-gray-700 text-white rounded-lg text-center text-2xl"
+                placeholder="0"
+                min="0"
+                required
+              />
+              <div className="mt-2 w-full">
+                <div className="bg-gray-700 rounded-full p-1 flex items-center justify-center">
+                  <button
+                    type="button"
+                    onClick={() => setUnit('kg')}
+                    className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                      unit === 'kg' 
+                        ? 'bg-blue-600 text-white' 
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    KG
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setUnit('lbs')}
+                    className={`px-3 py-1 rounded-full text-sm transition-colors ${
+                      unit === 'lbs' 
+                        ? 'bg-blue-600 text-white' 
+                        : 'text-gray-400 hover:text-white'
+                    }`}
+                  >
+                    LBS
+                  </button>
                 </div>
               </div>
             </div>
 
             {/* Multiplication Symbol */}
-            <span className="text-white text-2xl font-bold">×</span>
+            <div className="flex flex-col items-center justify-center h-[52px]">
+              <span className="text-white text-2xl font-bold">×</span>
+            </div>
 
-            {/* Reps Input */}
-            <div className="flex-1">
+            {/* Reps Input Column */}
+            <div className="flex-1 flex flex-col items-center">
               <input
                 type="number"
+                inputMode="numeric"
+                pattern="[0-9]*"
                 value={reps}
                 onChange={(e) => setReps(e.target.value)}
                 className="w-full p-3 bg-gray-700 text-white rounded-lg text-center text-2xl"
@@ -100,7 +105,7 @@ const ExercisePopup = ({ exercise, onClose, onSubmit }) => {
             type="submit"
             className="w-full bg-green-600 text-white p-4 rounded-lg text-xl font-semibold hover:bg-green-700 transition-colors"
           >
-            Save Set
+            SAVE THIS SET
           </button>
         </form>
       </motion.div>
