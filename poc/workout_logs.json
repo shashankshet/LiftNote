@@ -1,9 +1,0 @@
-{
-    "2025-01-16": [
-        "It seems that the user input is not related to a specific workout or exercise details. If you provide specific exercises, sets, reps, and weights, I can help you create a structured workout log. Please share the details!",
-        "It seems that the input provided does not contain any specific workout details. Please provide the exercises, sets, reps, and weights you would like to log, and I will create a structured workout log for you.",
-        "Exercise Name      | Sets | Reps | Weight (kg)  \n-------------------|------|------|--------------  \nLat Pulldown       | 3    | 10   | 66",
-        "Here is the structured workout log based on your input:\n\nExercise Name | Sets | Reps | Weight (kg)  \nInclined Dumbbell Bench Press | 3 | N/A | 25",
-        "Here is the structured workout log based on your input:\n\nExercise Name | Sets | Reps | Weight (kg)  \nPull-ups       | 3    | Bodyweight | 0"
-    ]
-}
