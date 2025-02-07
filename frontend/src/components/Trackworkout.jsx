@@ -3,6 +3,7 @@ import workoutCategories from "../data/workoutCategories.json";
 import { motion } from "framer-motion";
 import { SearchIcon } from "@heroicons/react/solid";
 import ExercisePopup from "./ExercisePopup";
+import WorkoutSummaryPopup from "./WorkoutSummaryPopup";
 import { workoutService } from "../services/workout.service";
 
 const Trackworkout = () => {
@@ -12,6 +13,8 @@ const Trackworkout = () => {
   const [workouts, setWorkouts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [showSummaryPopup, setShowSummaryPopup] = useState(false);
+  const [lastWorkout, setLastWorkout] = useState({});
 
   useEffect(() => {
     fetchWorkouts();
@@ -37,9 +40,14 @@ const Trackworkout = () => {
     setSelectedExercise(exercise);
   };
 
-  const handleSubmit = async (weight, reps, unit) => {
+  const handleWorkoutSave = (weight, reps) => {
+    setLastWorkout({ exercise: selectedExercise, weight, reps });
+    setShowSummaryPopup(true);
+  };
+
+  const handleAddNewLog = () => {
     setSelectedExercise(null);
-    await fetchWorkouts();
+    setSelectedCategory(null);
   };
 
   const filteredExercises = workoutCategories
@@ -162,8 +170,55 @@ const Trackworkout = () => {
         <ExercisePopup
           exercise={selectedExercise}
           onClose={() => setSelectedExercise(null)}
-          onSubmit={handleSubmit}
+          onSubmit={handleWorkoutSave}
         />
+      )}
+
+      {/* Workout Summary Popup */}
+      {showSummaryPopup && (
+        <WorkoutSummaryPopup
+          exercise={lastWorkout.exercise}
+          weight={lastWorkout.weight}
+          reps={lastWorkout.reps}
+          onClose={() => setShowSummaryPopup(false)}
+          onAddNewLog={handleAddNewLog}
+        />
+      )}
+
+      {/* Category Popup */}
+      {selectedCategory && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-40"
+          onClick={() => setSelectedCategory(null)}
+        >
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="bg-black p-6 rounded-lg border border-gray-800 w-[90%] max-w-md"
+            onClick={e => e.stopPropagation()}
+          >
+            <h3 className="text-2xl font-bold text-white mb-4">{selectedCategory.name}</h3>
+            <div className="grid grid-cols-1 gap-2">
+              {selectedCategory.exercises.map((exercise) => (
+                <motion.button
+                  key={exercise}
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="text-left p-4 bg-gray-900 rounded-lg text-white hover:bg-gray-800 transition-colors"
+                  onClick={() => {
+                    setSelectedExercise(exercise);
+                    setSelectedCategory(null);
+                  }}
+                >
+                  {exercise}
+                </motion.button>
+              ))}
+            </div>
+          </motion.div>
+        </motion.div>
       )}
     </div>
   );
