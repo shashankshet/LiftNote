@@ -58,8 +58,14 @@ const WorkoutSummaryPopup = ({ exercise, weight, reps, onClose, onAddNewLog }) =
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between mb-4">
-          <button className="text-white">Edit Workout</button>
-          <button className="text-white">Share</button>
+          <button className="border border-gray-800 rounded-full px-4 py-2 text-white hover:bg-gray-800 transition-colors">
+            Edit Workout
+          </button>
+          <button className="flex items-center justify-center border border-gray-800 rounded-full px-4 py-2 text-white hover:bg-gray-800 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+            </svg>
+          </button>
         </div>
         <h3 className="text-2xl font-bold text-white mb-2">{exercise}</h3>
         <div className="text-lg text-white mb-2">My Best Set: {weight} kg x {reps} reps</div>
